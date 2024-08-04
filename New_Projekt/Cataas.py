@@ -35,7 +35,7 @@ def set_image():
 
 window = Tk()
 window.title("Cats!")
-window.geometry("600x480")
+window.geometry("600x550")
 
 # Создаем метку без изображения
 label = Label()
@@ -45,16 +45,23 @@ label.pack()
 update_button = Button(text="Обновить", command=set_image)
 update_button.pack()
 
+# Кнопка "Выход"
+exit_button = Button(text='Выход', command=window.destroy)
+# Упаковываем кнопку "Выход".
+# Кнопку устанавливаем в правом нижнем углу, окна программы.
+# С отступами по горизонтали и вертикали.
+exit_button.pack(side=RIGHT, padx=10, pady=10)
+
 url = 'https://cataas.com/cat'
 # Вызываем функцию для установки изображения в метку
 set_image()
 
-img = load_image(url)
+# img = load_image(url)
 
-if img:
-    # Устанавливаем изображение в метку
-    label.config(image=img)
-    # Необходимо сохранить ссылку на изображение, чтобы избежать сборки мусора
-    label.image = img  
+# if img:
+#     # Устанавливаем изображение в метку
+#     label.config(image=img)
+#     # Необходимо сохранить ссылку на изображение, чтобы избежать сборки мусора
+#     label.image = img
 
 window.mainloop()
