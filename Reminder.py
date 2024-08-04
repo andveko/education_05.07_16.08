@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import simpledialog as sd
 from tkinter import messagebox as mb
 import datetime
+# Импортируем модуль pygame
 import pygame
 import time
 
