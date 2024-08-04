@@ -22,6 +22,15 @@ def load_image(url):
         print(f"Ошибка при загрузке изображения: {e}")
         return None
 
+def set_image():
+    # Вызываем функцию для загрузки изображения
+    img = load_image(url)
+
+    if img:
+        # Устанавливаем изображение в метку
+        label.config(image=img)
+        label.image = img
+
 window = Tk()
 window.title("Cats!")
 window.geometry("600x480")
@@ -30,7 +39,14 @@ window.geometry("600x480")
 label = Label()
 label.pack()
 
+# Добавляем кнопку для обновления изображения
+update_button = Button(text="Обновить", command=set_image)
+update_button.pack()
+
 url = 'https://cataas.com/cat'
+# Вызываем функцию для установки изображения в метку
+set_image()
+
 img = load_image(url)
 
 if img:
