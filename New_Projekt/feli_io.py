@@ -16,10 +16,17 @@ window = Tk()
 window.title("Сохранение файлов в облаке")
 window.geometry('400x200')
 
-upload_button = ttk.Button(text="Загрузить файл", command=upload)
-upload_button.pack()
+upload_button = ttk.Button(text="Загрузить файл", width=29, command=upload)
+upload_button.pack(padx=10, pady=10)
 
-entry = ttk.Entry()
-entry.pack()
+link_entry = ttk.Entry(width=30)
+link_entry.pack(padx=10, pady=10)
+
+# Кнопка "Выход"
+exit_button = ttk.Button(text='Выход', command=window.destroy)
+# Упаковываем кнопку "Выход".
+# Кнопку устанавливаем в правом нижнем углу, окна программы.
+# С отступами по горизонтали и вертикали.
+exit_button.pack(side=BOTTOM,padx=10, pady=(0, 10))
 
 window.mainloop()
