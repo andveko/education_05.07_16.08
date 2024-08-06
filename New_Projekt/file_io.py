@@ -1,16 +1,28 @@
 from tkinter import *
 import requests
 from tkinter import filedialog as fd
+from tkinter import messagebox as mb
 from tkinter import ttk
 
 def upload():
-    filepath = fd.askopenfilename()
-    if filepath:
-        files = {'file': open(filepath, 'rb')}
-        response = requests.post('https://file.io', files=files)
-        if response.status_code == 200:
-            download_link = response.json()['link']
-            link_entry.insert(0, download_link)
+    try:
+        filepath = fd.askopenfilename()
+        if filepath:
+            with open(filepath, 'rb') as f:
+                files = {'file': f}
+                response = requests.post('https://file.io', files=files)
+                response.raise_for_status()  # Проверка на ошибки HTTP
+                download_link = response.json().get('link')
+                if download_link:
+                    link_entry.delete(0, END)
+                    link_entry.insert(0, download_link)
+                else:
+                    raise ValueError("Не удалось получить ссылку для скачивания")
+    except ValueError as ve:
+        mb.showerror("Ошибка", f"Произошла ошибка: {ve}")
+    except Exception as e:
+        mb.showerror("Ошибка", f"Произошла ошибка: {e}")
+
 
 window = Tk()
 window.title("Сохранение файлов в облаке")
